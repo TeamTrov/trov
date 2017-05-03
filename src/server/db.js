@@ -1,6 +1,7 @@
 var mysql = require('mysql');
 var sequelize = require('sequelize');
 
+// establish connection
 var connection = mysql.createConnection({
     host: 'localhost',
     username: 'root',
@@ -8,6 +9,7 @@ var connection = mysql.createConnection({
     database: 'trov'
 });
 
+// establish connection error instance
 connection.connect((err) => {
   if(err) {
     console.error(error)
