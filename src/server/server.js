@@ -1,17 +1,28 @@
 var express = require('express');
-var server = express();
-var bodyParser = require('body-parser');
+var app = require('../app')
 var db = require('./db.js');
+
+// middleware
+var bodyParser = require('body-parser');
 var request = require('request');
 
-server.use(bodyParser.json());
+app.use(bodyParser.json());
 
-server.get('/', function (req, res) {
+console.log("sss");
+// server.get('/', function (req, res) {
+//   res.send('CLIENT-SERVER.JS Get Request Received');
+// });
+
+app.get('/', function (req, res) {
   res.send('CLIENT-SERVER.JS Get Request Received');
 });
 
-server.post('/', function (req, res) {
+app.post('/', function (req, res) {
   res.send('CLIENT-SERVER.JS Post Request Received');
 });
 
-module.exports.server = server;
+// post req new user
+// post req upd prog
+// post req upd trov complete
+
+// module.exports = server;
