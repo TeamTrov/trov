@@ -12,7 +12,7 @@ var connection = mysql.createConnection({
 // establish connection error instance
 connection.connect((err) => {
   if(err) {
-    console.error(error)
+    console.error("ERROR connecting to database!")
   } else {
     console.log('DATABASE connection established');
   }
