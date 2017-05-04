@@ -1,16 +1,17 @@
 var express = require('express');
-var app = express.Router();
+var server = express.Router();
 
-//Middle ware that is specific to this app
-app.use(function(req, res, next) {
+// routing requests from app.js
+server.use(function(req, res, next) {
   console.log("APP.JS -> SERVER.JS Route Successful");
   next();
 });
 
+// express get route commented out for now
 
-// app.get('/', function(req, res) {
-//   null;
+// server.get('/', function(req, res) {
+//   console.log('home page')
 // });
 
 
-module.exports = app;
+module.exports = server;
