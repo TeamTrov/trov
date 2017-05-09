@@ -1,15 +1,18 @@
 import React from 'react';
-import {render} from 'react-dom';
+import render from 'react-dom';
+import Troves from './trov/troves.js';
+import TrovMain from './trov/trovmain.js';
+import Header from './header.js';
 
+// <<<<<<< HEAD
+// >>>>>>> 069d935a8b0a4b81d2903eca783ee94e8ec877a1
 
-
-export class VisitorMain extends React.Component {
+export default class VisitorMain extends React.Component {
   render () {
     return (
     <div id="visitormain" className="jumbotron text-center">
-      <h1>Trov</h1>
-      <p>WE WILL MAKE YOU RICH BEYOND YOUR WILDEST DREAMS</p> 
-      <img className="bg-featured" src="../images/banner.jpg"></img>
+      <Troves />
+      <p>WE WILL MAKE YOU RICH BEYOND YOUR WILDEST DREAMS</p>
     </div>
     )
   }

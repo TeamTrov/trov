@@ -1,13 +1,15 @@
 import React from 'react';
-import {render} from 'react-dom';
+import render from 'react-dom';
 
 
-export class Footer extends React.Component {
+class Footer extends React.Component {
   render () {
     return (
     <div id="footer">
-      <p> Hello React!!  From Footer</p>
+      <p>&copy;2017 Brandon Brown, Jake Holtz, Ashwin Narasimhan, Jon Stewart. All Rights Reserved</p>
     </div>
     )
   }
 }
+
+export default Footer;

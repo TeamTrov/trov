@@ -1,12 +1,17 @@
 import React from 'react';
-import {render} from 'react-dom';
+import render from 'react-dom';
+import Trov from './trov.js';
 
 
-export class Troves extends React.Component {
+export default class Troves extends React.Component {
+  constructor () {
+    super();
+  }
   render () {
     return (
     <div id="troves">
-      <p> Hello React!!  From Troves</p>
+      <h1> Your Troves</h1>
+      <Trov />
     </div>
     )
   }
