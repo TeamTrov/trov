@@ -110,4 +110,11 @@ server.post('https://localhost:3000/addnewusertodb', function(req, res) {
   res.end();
 });
 
+// *** GET USER'S CURRENT TROVE **
+server.get('/getuserdata', function(req, res) {
+  // input: username
+  // go to database
+  // return current trove of user and progress
+});
+
 module.exports = server;

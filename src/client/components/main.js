@@ -142,9 +142,9 @@ class Main extends React.Component {
       currentChallengeNum: currentChallengeNum
     }
     axios.post('http://localhost:3000/updateusertrov', updatedTrovInfo)
-      .then(function() {
+    .then(function() {
         console.log('user trov data updated');
-      })
+    })
   }
 
 
