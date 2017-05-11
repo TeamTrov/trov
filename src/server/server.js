@@ -2,8 +2,6 @@ var express = require('express');
 var server = express.Router();
 var db = require('./db.js')
 
-
-
 // routing requests from app.js
 server.use(function(req, res, next) {
   console.log("APP.JS -> SERVER.JS Route Successful");
@@ -46,6 +44,13 @@ db.connection.query(`CREATE TABLE IF NOT EXISTS challenges (
   reward VARCHAR(100)
 );`);
 
+// test data
+// db.connection.query(`USE trov;`);
+// db.connection.query(`INSERT INTO users (username, facebookId, email) VALUES ('jholtz', 'jakeholtz', 'jahholtz@gmail.com');`);
+// db.connection.query(`INSERT INTO users (username, facebookId, email) VALUES ('dholtz', 'dakeholtz', 'dahholtz@gmail.com');`);
+// db.connection.query(`INSERT INTO trovs (name, createdBy, numberOfUsers, currentProgress, challenges) VALUES ('Mission Madness', 2, 2, 0, '[1, 2, 3]');`);
+// db.connection.query(`INSERT INTO trovs (name, createdBy, numberOfUsers, currentProgress, challenges) VALUES ('Kalua Kraziness', 1, 1, 0, '[4, 5, 6]');`);
+
 // *** GET ALL TROVES FROM DB **
 server.get('/getalltrovs', function(req, res) {
   var AllTrovs;
@@ -53,10 +58,9 @@ server.get('/getalltrovs', function(req, res) {
   db.connection.query(`SELECT * FROM trovs;`,
     function(error, result) {
       if(error) {
-        console.log("Error querying")
-        console.log(error)
+        console.log("Error querying database (/getalltrovs)");
       } else {
-        console.log("Success querying")
+        console.log("Success querying");
         // console.log(result);
         AllTrovs = JSON.stringify(result);
         res.end(AllTrovs);
@@ -68,15 +72,14 @@ server.get('/getalltrovs', function(req, res) {
 // *** UPDATE TROVE FROM DB **
 server.post('/updateusertrov', function(req, res) {
   var trovName = req.body.trovName;
-  var currChall = req.body.currentChallengeNum;
-
+  var currentChallengeNum = req.body.currentChallengeNum;
   db.connection.query(`use trov`);
-  db.connection.query(`UPDATE trovs SET currentProgress = ${currChall} WHERE name = "${trovName}";`,
+  db.connection.query(`UPDATE trovs SET currentProgress = ${currentChallengeNum} WHERE name = "${trovName}";`,
     function(error, result) {
       if(error) {
-        console.log("Error querying")
+        console.log("Error querying database (/updateusertrov)");
       } else {
-        console.log("Success updating trov!")
+        console.log(`Success updating trov: ${trovName}`);
       }
     }
   )
@@ -84,25 +87,22 @@ server.post('/updateusertrov', function(req, res) {
 });
 
 // *** ADD USER **
-server.post('https://localhost:3000/addnewusertodb', function(req, res) {
-  // req.body.username
-  var newUser = req.body.username;
+server.post('/addnewusertodb', function(req, res) {
+  var username = req.body.username;
+  var facebookId = req.body.facebookId;
   var email = req.body.email;
-
   db.connection.query(`use trov`);
-  db.connection.query(`SELECT * FROM users WHERE username = "${newUser}";`,
+  db.connection.query(`SELECT * FROM users WHERE username = "${username}";`,
     function(error, result) {
       if(error) {
-        console.log("Error querying")
+        console.log("Error querying database (/addnewusertodb)")
       } else {
         if (result.length === 0) {
-          // username doesn't exist
-          console.log("User doesn't exist!")
           db.connection.query(`use trov`);
-          db.connection.query(`INSERT INTO users (username, email) VALUES ("${newUser}", "${email}")`);
+          db.connection.query(`INSERT INTO users (username, facebookId, email) VALUES ("${username}", "${facebookId}", "${email}")`);
+          console.log(`User "${username}" doesn't yet exist. Added user to database`)
         } else {
-          console.log("User exists!")
-          // username already exist
+          console.log(`User "${username}" already exists in database!`);
         }
       }
     }
