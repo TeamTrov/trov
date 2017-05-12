@@ -3,21 +3,21 @@ var mysql = require('mysql');
 var app = express();
 
 
-// establish remote database connection
-// var connection = mysql.createConnection({
-//   port     : 3306,
-//   host     : 'trov.cemgq7chalnt.us-west-1.rds.amazonaws.com',
-//   user     : 'teamtrov',
-//   password : 'teamtrov'
-// });
-
-// establish local database connection (for test use)
+// establish remote database connection (for actual use)
 var connection = mysql.createConnection({
   port     : 3306,
-  host     : 'localhost',
-  user     : 'root',
-  password : ''
+  host     : 'trov.cemgq7chalnt.us-west-1.rds.amazonaws.com',
+  user     : 'teamtrov',
+  password : 'teamtrov'
 });
+
+// establish local database connection (for test use)
+// var connection = mysql.createConnection({
+//   port     : 3306,
+//   host     : 'localhost',
+//   user     : 'root',
+//   password : ''
+// });
 
 
 // handle database connection errors
