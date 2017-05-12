@@ -8,8 +8,9 @@ server.use(function(req, res, next) {
   next();
 });
 
+// db.connection.query(`DROP DATABASE trov;`); // <--- comment in to reset database
+
 // creating tables in database
-// db.connection.query(`DROP DATABASE trov;`);
 db.connection.query(`CREATE DATABASE IF NOT EXISTS trov;`);
 db.connection.query(`USE trov;`);
 db.connection.query(`CREATE TABLE IF NOT EXISTS users (
@@ -43,15 +44,6 @@ db.connection.query(`CREATE TABLE IF NOT EXISTS challenges (
   longitude VARCHAR(100),
   reward VARCHAR(100)
 );`);
-
-// test data
-// db.connection.query(`USE trov;`);
-// db.connection.query(`INSERT INTO users (username, facebookId, email) VALUES ('jholtz', 'jjjholtz', 'jazz@gmail.com');`);
-// db.connection.query(`INSERT INTO users (username, facebookId, email) VALUES ('dholtz', 'dddholtz', 'dazz@gmail.com');`);
-// db.connection.query(`INSERT INTO trovs (name, createdBy, numberOfUsers, currentProgress, challenges) VALUES ('Mission Madness', 'dholtz', 2, 0, '[1, 2, 3]');`);
-// db.connection.query(`INSERT INTO trovs (name, createdBy, numberOfUsers, currentProgress, challenges) VALUES ('Kalua Kraziness', 'jholtz', 1, 0, '[4, 5, 6]');`);
-// db.connection.query(`INSERT INTO users_trovs (userId, trovId, isCurrentTrov, currentChallengeNo, totalChallengesNo) VALUES ('jholtz', 'Mission Madness', false, 10, 10);`);
-// db.connection.query(`INSERT INTO users_trovs (userId, trovId, isCurrentTrov, currentChallengeNo, totalChallengesNo) VALUES ('jholtz', 'Kalua Kraziness', true, 1, 10);`);
 
 // *** GET ALL TROVES FROM DB **
 server.get('/getalltrovs', function(req, res) {
@@ -113,14 +105,13 @@ server.post('/addnewusertodb', function(req, res) {
 });
 
 // *** GET USER'S CURRENT TROVE **
-server.get('/getusertrovdata', function(req, res) {
+server.get('/getuserdata', function(req, res) {
   var trovData;
-  var username = "jholtz"; // needs to be updated
   db.connection.query(`use trov`);
-  db.connection.query(`SELECT * FROM users_trovs WHERE userId = "${username}" AND isCurrentTrov = true;`,
+  db.connection.query(`SELECT * FROM users_trovs WHERE isCurrentTrov = true;`,
     function(error, result) {
       if(error) {
-        console.log("Error querying database (/getusertrovdata)");
+        console.log("Error querying database (/getuserdata)");
       } else {
         if (result.length !== 0) {
           trovData = JSON.stringify(result);
