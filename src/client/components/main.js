@@ -127,6 +127,7 @@ class Main extends React.Component {
             currentChallengeNum: userTrovArray.data.currTrov[0].currentChallengeNo
           });
         } else {
+          console.log('User not currently on a trove!');
           context.setState({
             isOnTrovNow: false,
             userTrovs: [],
