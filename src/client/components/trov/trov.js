@@ -9,6 +9,7 @@ export default class Trov extends React.Component {
     super(props);
     this.state = {
       currentChallengeNum: this.props.progress,
+      trovName: '',
       challenges: this.props.challenges,
       userLat: 0.00,
       userLong: 0.00,
@@ -17,6 +18,7 @@ export default class Trov extends React.Component {
   componentWillReceiveProps(newProps) {
     this.setState({
       currentChallengeNum: newProps.progress,
+      trovName: this.props.trovName,
       challenges: newProps.challenges
     });
   }
@@ -76,7 +78,7 @@ export default class Trov extends React.Component {
   render () {
     return (
     <div id="trov">
-      <h2>{this.props.trovName}</h2>
+      <h2>{this.state.trovName}</h2>
       <ul className="quest">
         {this.renderChallenges()}
       </ul>
