@@ -246,4 +246,6 @@ server.get('/getuserdata', function(req, res) {
 // db.connection.query("INSERT INTO challenges (id, name, hint, challengeNum, latitude, longitude, reward, trov) VALUES (18, 'HR Kitchen', 'Yummm food', 3, 37.783697, -122.408966, null, 'Hack Reactor Happiness');");
 // db.connection.query("INSERT INTO users_trovs (userId, trovId, isCurrentTrov, currentChallengeNo, totalChallengesNo) VALUES ('Brandon Lee Brown', 'Tahoe Trek', 0, 1, 3);");
 // db.connection.query("INSERT INTO users_trovs (userId, trovId, isCurrentTrov, currentChallengeNo, totalChallengesNo) VALUES ('Brandon Lee Brown', 'Tahoe Trek', 0, 2, 3);");
-// db.connection.query("INSERT INTO users_trovs (userId, trovId, isCurrentTrov, currentChallengeNo, totalCha
+// db.connection.query("INSERT INTO users_trovs (userId, trovId, isCurrentTrov, currentChallengeNo, totalChallengesNo) VALUES ('Brandon Lee Brown', 'Tahoe Trek', 1, 3, 3);");
+
+module.exports = server;
