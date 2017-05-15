@@ -68,7 +68,7 @@ server.get('/getalltrovs', function(req, res) {
   )
 });
 
-// *** UPDATE TROVE FROM DB **
+// *** UPDATE TROVE PROGRESS **
 server.post('/updateusertrov', function(req, res) {
   var trovName = req.body.trovName;
   var currentChallengeNum = req.body.currentChallengeNum;
@@ -83,6 +83,23 @@ server.post('/updateusertrov', function(req, res) {
   }
 )
 res.end();
+});
+
+// *** ADD TROV TO (TROVLESS) USER**
+server.post('/addnewusertrov', function(req, res) {
+  var username = req.body.username;
+  var trov = req.body.trovName;
+  db.connection.query(`use trov`);
+  db.connection.query(`INSERT INTO users_trovs (userId, trovId, isCurrentTrov, currentChallengeNo, totalChallengesNo) VALUES ("${username}", "${trovName}", 1, 1, 3)`,
+    function(error, result) {
+      if(error) {
+        console.log("Error querying database (/addnewusertrov)");
+      } else {
+        console.log(`Success adding user's new trov`);
+      }
+    }
+  )
+  res.end();
 });
 
 // *** UPDATE USER TROV CHALLENGE NO **
@@ -121,7 +138,7 @@ server.post('/addnewusertodb', function(req, res) {
   db.connection.query(`SELECT * FROM users WHERE username = "${username}";`,
   function(error, result) {
     if(error) {
-      console.log("Error querying database (/addnewusertodb)")
+      console.log("Error querying database (/addnewusertodb)");
     } else {
       if (result.length === 0) {
         db.connection.query(`use trov`);
@@ -229,6 +246,4 @@ server.get('/getuserdata', function(req, res) {
 // db.connection.query("INSERT INTO challenges (id, name, hint, challengeNum, latitude, longitude, reward, trov) VALUES (18, 'HR Kitchen', 'Yummm food', 3, 37.783697, -122.408966, null, 'Hack Reactor Happiness');");
 // db.connection.query("INSERT INTO users_trovs (userId, trovId, isCurrentTrov, currentChallengeNo, totalChallengesNo) VALUES ('Brandon Lee Brown', 'Tahoe Trek', 0, 1, 3);");
 // db.connection.query("INSERT INTO users_trovs (userId, trovId, isCurrentTrov, currentChallengeNo, totalChallengesNo) VALUES ('Brandon Lee Brown', 'Tahoe Trek', 0, 2, 3);");
-// db.connection.query("INSERT INTO users_trovs (userId, trovId, isCurrentTrov, currentChallengeNo, totalChallengesNo) VALUES ('Brandon Lee Brown', 'Tahoe Trek', 1, 3, 3);");
-
-module.exports = server;
+// db.connection.query("INSERT INTO users_trovs (userId, trovId, isCurrentTrov, currentChallengeNo, totalCha

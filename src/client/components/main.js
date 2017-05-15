@@ -79,7 +79,7 @@ class Main extends React.Component {
         handleLogIn={this.props.handleLogIn}
       />
     } else if (!this.state.isOnTrovNow && this.state.isLoggedIn) {
-      return <UserNoTrovMain allTrovs={this.state.allTrovs} selectTrov={this.handleSelectTrov}/>
+      return <UserNoTrovMain allTrovs={this.state.allTrovs} selectTrov={this.handleSelectTrov.bind(this)} username={this.state.username} />
     } else if (this.state.isOnTrovNow && this.state.isLoggedIn) {
       return <Troves userTrovs={this.state.userTrovs}
                      getUserData={this.getUserData.bind(this)}

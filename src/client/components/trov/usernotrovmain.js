@@ -19,7 +19,7 @@ class UserNoTrovMain extends React.Component {
     return (
     <div className="troves" id="usernotrovmain">
       <h1>All Trovs</h1>
-      {this.state.allTrovs.map((trov, trovId) => <Trov joinTrov={this.props.selectTrov} challenges={trov} trovName={trov.name} key={trovId} />)}
+      {this.state.allTrovs.map((trov, trovId) => <Trov joinTrov={this.props.selectTrov} username = {this.props.username} challenges={trov} trovName={trov.name} key={trovId} />)}
     </div>
     )
   }

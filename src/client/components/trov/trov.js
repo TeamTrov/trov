@@ -13,7 +13,6 @@ export default class Trov extends React.Component {
       userLat: 0.00,
       userLong: 0.00,
     }
-    // this.joinTrov.bind(this);
   }
   componentWillReceiveProps(newProps) {
     this.setState({
@@ -23,14 +22,15 @@ export default class Trov extends React.Component {
   }
 
   joinTrov() {
+    console.log(this);
     var trovContext = this;
-    // axios.post('http://trov.herokuapp.com/addnewusertodb', {
-    //   username: trovContext.props.username,
-    //   trovName: trovContext.props.trovName
-    // })
-    // .then(function() {
-    //   trovContext.props.selectTrov();
-    // });
+    axios.post('http://trov.herokuapp.com/addnewusertodb', {
+      username: trovContext.props.username,
+      trovName: trovContext.props.trovName
+    })
+    .then(function() {
+      trovContext.props.selectTrov();
+    });
   }
 
   alertGeoCoords() {
