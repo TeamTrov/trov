@@ -6,7 +6,7 @@ class Auth extends React.Component {
 
   handleLogInButtonClick() {
     // axios.({
-    //   url: 'localhost:3000/auth/facebook',
+    //   url: 'trov.herokuapp.com/auth/facebook',
     //   headers: {"Access-Control-Allow-Origin": "*"}
     // });
   }
