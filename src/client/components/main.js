@@ -13,7 +13,7 @@ class Main extends React.Component {
     super(props);
     this.state = {
       isLoggedIn: false,
-      isOnTrovNow: false,
+      isOnTrovNow: '',
       username: '',
       allTrovs: [],
       userTrovs: [],
@@ -44,7 +44,7 @@ class Main extends React.Component {
   }
 
   handleSelectTrov () { //how to insert trov as parameter???
-    console.log('Trov selected!')
+    console.log('Trov selected!');
     if (this.state.isLoggedIn) {
       this.setState({
         isOnTrovNow: true,
