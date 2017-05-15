@@ -14,6 +14,12 @@ export default class Trov extends React.Component {
       userLong: 0.00,
     }
   }
+  // componentWillMount() {
+  //   this.setState({
+  //     currentChallengeNum: this.props.progress,
+  //     challenges: this.props.challenges
+  //   });
+  // }
   componentWillReceiveProps(newProps) {
     this.setState({
       currentChallengeNum: newProps.progress,
@@ -66,9 +72,7 @@ export default class Trov extends React.Component {
         toRender.push(<Quest challenge={"Challenge"} key={counter} displayType={"challenge"}/>);
       }
     }
-    if (this.state.challenges[counter] === undefined) {
-      toRender.push(<Quest challenge={"You have completed this Trov"} key={counter} displayType={"trov-completion"}/>);
-    } else {
+    if (this.state.challenges[counter] !== undefined) {
       toRender.push(<Quest challenge={this.state.challenges[counter].hint} key={counter} displayType={"hint"}/>);
     }
     return toRender;

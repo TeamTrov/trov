@@ -13,6 +13,12 @@ export default class TrovMain extends React.Component {
       userLong: 0.00,
     }
   }
+  // componentWillMount() {
+  //   this.setState({
+  //     currentChallengeNum: this.props.progress,
+  //     challenges: this.props.challenges
+  //   });
+  // }
   componentWillReceiveProps(newProps) {
     this.setState({
       currentChallengeNum: newProps.progress,
