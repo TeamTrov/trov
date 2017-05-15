@@ -30,6 +30,9 @@ export default class Trov extends React.Component {
     })
     .then(function() {
       trovContext.props.selectTrov();
+    })
+    .catch(function(error) {
+      console.log(error);
     });
   }
 

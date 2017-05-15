@@ -88,7 +88,7 @@ res.end();
 // *** ADD TROV TO (TROVLESS) USER**
 server.post('/addnewusertrov', function(req, res) {
   var username = req.body.username;
-  var trov = req.body.trovName;
+  var trovName = req.body.trovName;
   db.connection.query(`use trov`);
   db.connection.query(`INSERT INTO users_trovs (userId, trovId, isCurrentTrov, currentChallengeNo, totalChallengesNo) VALUES ("${username}", "${trovName}", 1, 1, 3)`,
     function(error, result) {
