@@ -19,7 +19,7 @@ class App extends React.Component {
 
   componentWillMount () {
     var context = this;
-    axios.get('http://trov.herokuapp.com/getcurrentuser')
+    axios.get('http://localhost:3000/getcurrentuser')
     .then(function(user) {
       console.log('Searching for logged-in user...');
       var userName = user.data;

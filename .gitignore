@@ -3,6 +3,3 @@
 
 ## NPM ##
 node_modules/
-
-## bundle.js ##
-src/client/public/bundle.js

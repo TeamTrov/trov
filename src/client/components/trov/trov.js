@@ -2,6 +2,7 @@ import React from 'react';
 import render from 'react-dom';
 import Quest from './quest.js';
 import Map from '../map.js';
+import axios from 'axios';
 
 export default class Trov extends React.Component {
   constructor (props) {
@@ -12,12 +13,24 @@ export default class Trov extends React.Component {
       userLat: 0.00,
       userLong: 0.00,
     }
+    // this.joinTrov.bind(this);
   }
   componentWillReceiveProps(newProps) {
     this.setState({
       currentChallengeNum: newProps.progress,
       challenges: newProps.challenges
     });
+  }
+
+  joinTrov() {
+    var trovContext = this;
+    // axios.post('http://localhost:3000/addnewusertodb', {
+    //   username: trovContext.props.username,
+    //   trovName: trovContext.props.trovName
+    // })
+    // .then(function() {
+    //   trovContext.props.selectTrov();
+    // });
   }
 
   alertGeoCoords() {
@@ -64,7 +77,7 @@ export default class Trov extends React.Component {
       <ul className="quest">
         {this.renderChallenges()}
       </ul>
-      <button type="button" className="btn" onClick={this.props.selectTrov}>Join Trov</button>
+      <button type="button" className="btn" onClick={this.joinTrov.bind(this)}>Join Trov</button>
     </div>
     )
   }

@@ -27,7 +27,7 @@ class Troves extends React.Component {
     return (
     <div className="troves">
       <h1>Your Troves</h1>
-      <TrovMain challenges={this.state.challenges} trovName={this.state.trovNames} completeChallenge={this.props.completeChallenge} progress={this.props.progress}/>
+      <TrovMain challenges={this.state.challenges} trovName={this.state.trovNames} completeChallenge={this.props.completeChallenge} progress={this.props.progress} username={this.props.username}/>
     </div>
     )
   }

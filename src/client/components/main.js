@@ -48,8 +48,7 @@ class Main extends React.Component {
     if (this.state.isLoggedIn) {
       this.setState({
         isOnTrovNow: true,
-        currentTrov: testTrov //change me when we can select new trovs!!!!
-      })
+      });
     }
   }
 
@@ -85,6 +84,7 @@ class Main extends React.Component {
       return <Troves userTrovs={this.state.userTrovs}
                      getUserData={this.getUserData.bind(this)}
                      completeChallenge={this.handleCompleteChallenge.bind(this)}
+                     username={this.state.username}
                      progress={this.state.currentChallengeNum} />
     }
   }
@@ -96,7 +96,7 @@ class Main extends React.Component {
       email: email,
       location: location
     }
-    axios.post('http://trov.herokuapp.com/addnewusertodb', newUser)
+    axios.post('http://localhost:3000/addnewusertodb', newUser)
       .then(function() {
         console.log('user added');
       })
@@ -104,7 +104,7 @@ class Main extends React.Component {
 
   getAllTrovs () {
     var context = this;
-    axios.get('http://trov.herokuapp.com/getalltrovs')
+    axios.get('http://localhost:3000/getalltrovs')
       .then(function(trovArray) {
         context.setState({
           allTrovs: trovArray.data
@@ -118,12 +118,21 @@ class Main extends React.Component {
   getUserData () {
     var context = this;
     var processedUsername = this.state.username.split(' ').join('+');
-    axios.get(`http://trov.herokuapp.com/getuserdata?id=${processedUsername}`)
+    axios.get(`http://localhost:3000/getuserdata?id=${processedUsername}`)
       .then(function(userTrovArray) {
-        context.setState({
-          userTrovs: userTrovArray.data,
-          currentChallengeNum: userTrovArray.data.currTrov[0].currentChallengeNo
-        });
+        console.log(userTrovArray);
+        if (userTrovArray.data !== "User not currently on a trove!") {
+          context.setState({
+            userTrovs: userTrovArray.data,
+            currentChallengeNum: userTrovArray.data.currTrov[0].currentChallengeNo
+          });
+        } else {
+          context.setState({
+            isOnTrovNow: false,
+            userTrovs: [],
+            currentChallengeNum: 0
+          });
+        }
     })
     .catch(function(error) {
         console.log('Unable to communicate with server', error);
@@ -135,7 +144,7 @@ class Main extends React.Component {
       trovName: trovName,
       currentChallengeNum: currentChallengeNum
     }
-    axios.post('http://trov.herokuapp.com/updateusertrov', updatedTrovInfo)
+    axios.post('http://localhost:3000/updateusertrov', updatedTrovInfo)
       .then(function() {
         console.log('user trov data updated');
       })
