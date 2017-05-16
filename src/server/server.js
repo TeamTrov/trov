@@ -172,6 +172,9 @@ server.get('/getcurrentuser', function(req, res) {
 });
 
 // *** LOGOUT USER ***
+// changes user's logged-in status in DB from true to false
+// browser currently retains a cookie/session. a new incognito window 
+// is required to login to a different facebook user
 server.get('/logoutuser', function(req, res) {
   db.connection.query(`use trov`);
   db.connection.query('UPDATE users SET isLoggedIn=false WHERE isLoggedIn=true',
